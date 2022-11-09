@@ -1,15 +1,25 @@
 const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
-// const request = require('supertest');
-// const app = require('../lib/app');
+//const  request  = require('express');
+const request = require('supertest');
+const app = require('../lib/app');
 
-describe('backend-express-template routes', () => {
+describe('book routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it('example test - delete me!', () => {
-    expect(1).toEqual(1);
+
+  it('GET /books should return a list of books', async () => {
+    const res = await request(app).get('/books');
+    expect(res.status).toBe(200);
+    expect(res.body.length).toEqual(1);
+    expect(res.body[0]).toEqual({
+      id: expect.any(String),
+      title: expect.any(String),
+      released: expect.any(String),
+    });
   });
+
   afterAll(() => {
     pool.end();
   });
