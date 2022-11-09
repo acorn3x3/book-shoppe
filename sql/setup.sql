@@ -9,38 +9,38 @@ CREATE TABLE authors (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   first_name VARCHAR,
   last_name VARCHAR,
-  dob YEAR,
-  pob VARCHAR,
-  FOREIGN KEY (book_id) REFERENCES books(id)
+  dob VARCHAR,
+  pob VARCHAR
+  
 );
 
 CREATE TABLE books (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
   title VARCHAR,
-  released VARCHAR,
-  FOREIGN KEY (author_id) REFERENCES author(id)
+  released VARCHAR
+ 
 );
 
 INSERT INTO authors (
   first_name,
   last_name,
   dob,
-  pob,
+  pob
  
 )
 VALUES 
-  ('Moira', 'Rose', 1989, 'springfield'),
-  ('Moira', 'Jude', 1989, 'springfield'),
+  ('Moira', 'Rose', '1989', 'springfield'),
+  ('Moira', 'Jude', '1989', 'springfield')
 
 ;
 
 INSERT INTO books (
 title, 
-released, 
+released 
 
 )
 
 VALUES 
-  ('Red Badge of Courage', 'example 2'),
+  ('Red Badge of Courage', 'example 2')
 
 ;
