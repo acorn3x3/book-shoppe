@@ -4,17 +4,20 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-descirbe('book routes', () => {
+describe('book routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
 
-  describe('/books should return a list of books', async () => {
-    const res = await request(app).get('books');
+  it('/books should return a list of books', async () => {
+    const res = await request(app).get('/books');
+    expect(res.status).toBe(200);
     expect(res.body.length).toEqual(1);
-    const redbadgeofcourage = res.body.find((char) => char.id === '1');
-    expect(redbadgeofcourage).toHaveProperty('title', 'Red Badge of Courage');
-    expect(redbadgeofcourage).toHaveProperty('released', 'example 2');
+    expect(res.body[0]).toEqual({
+      id: expect.any(String),
+      title: expect.any(String),
+      release: expect.any(String),
+    });
   });
 
   afterAll(() => {

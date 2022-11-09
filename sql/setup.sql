@@ -2,7 +2,7 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS authors;
 DROP TABLE IF EXISTS books;
-
+DROP TABLE IF EXISTS authors_books;
 
 
 CREATE TABLE authors (
@@ -15,9 +15,19 @@ CREATE TABLE authors (
 );
 
 CREATE TABLE books (
-  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR,
   released VARCHAR
+ 
+);
+
+CREATE TABLE authors_books (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  authors_id BIGINT,
+  books_id BIGINT,
+  FOREIGN KEY (authors_id) REFERENCES authors(id),
+  FOREIGN KEY (books_id) REFERENCES books(id)
+
  
 );
 
@@ -37,10 +47,16 @@ VALUES
 INSERT INTO books (
 title, 
 released 
-
 )
 
 VALUES 
   ('Red Badge of Courage', 'example 2')
+;
+
+INSERT INTO authors_books (authors_id, books_id) 
+VALUES
+(1,1),
+(2,1)
 
 ;
+
