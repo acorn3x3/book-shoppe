@@ -9,14 +9,14 @@ describe('book routes', () => {
     return setup(pool);
   });
 
-  it('/books should return a list of books', async () => {
+  it('GET /books should return a list of books', async () => {
     const res = await request(app).get('/books');
     expect(res.status).toBe(200);
     expect(res.body.length).toEqual(1);
     expect(res.body[0]).toEqual({
       id: expect.any(String),
       title: expect.any(String),
-      release: expect.any(String),
+      released: expect.any(String),
     });
   });
 
